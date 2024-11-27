@@ -1,0 +1,20 @@
+Connections
+
+IR Sensor 1:
+VCC to 5V, 
+GND to GND,
+OUT to pin 2.
+
+
+IR Sensor 2:
+VCC to 5V,
+GND to GND
+, OUT to pin 3.
+
+Buzzer:
+Positive pin to pin 4, 
+negative pin to GND.
+
+LED:
+Positive pin to pin 5 (with a resistor)
+, negative pin to GND.
