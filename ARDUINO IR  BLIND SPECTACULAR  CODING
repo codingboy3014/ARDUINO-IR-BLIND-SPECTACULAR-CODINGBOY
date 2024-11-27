@@ -1,0 +1,52 @@
+// Pin configuration
+const int irSensor1 = 2; // IR sensor 1 connected to digital pin 2
+const int irSensor2 = 3; // IR sensor 2 connected to digital pin 3
+const int buzzer = 4;    // Buzzer connected to digital pin 4
+const int led = 5;       // LED connected to digital pin 5
+
+void setup() {
+  // Set pin modes
+  pinMode(irSensor1, INPUT);
+  pinMode(irSensor2, INPUT);
+  pinMode(buzzer, OUTPUT);
+  pinMode(led, OUTPUT);
+
+  // Initialize Serial Monitor
+  Serial.begin(9600);
+
+  // Start with buzzer and LED off
+  digitalWrite(buzzer, LOW);
+  digitalWrite(led, LOW);
+
+  Serial.println("Security system initialized.");
+}
+
+void loop() {
+  // Read sensor states
+  int ir1State = digitalRead(irSensor1);
+  int ir2State = digitalRead(irSensor2);
+
+  // Check if any sensor is triggered
+  if (ir1State == LOW) {
+    Serial.println("Intruder detected by IR sensor 1!");
+    alert(); // Trigger alert function
+  } else if (ir2State == LOW) {
+    Serial.println("Intruder detected by IR sensor 2!");
+    alert(); // Trigger alert function
+  } else {
+    // If no detection, ensure buzzer and LED are off
+    digitalWrite(buzzer, LOW);
+    digitalWrite(led, LOW);
+  }
+
+  delay(100); // Small delay to reduce sensor noise
+}
+
+// Function to handle alert
+void alert() {
+  digitalWrite(buzzer, HIGH); // Turn on buzzer
+  digitalWrite(led, HIGH);    // Turn on LED
+  delay(500);                 // Alert duration
+  digitalWrite(buzzer, LOW);  // Turn off buzzer
+  digitalWrite(led, LOW);     // Turn off LED
+}
